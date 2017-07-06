@@ -1,10 +1,10 @@
 ## 一个轻量的模板引擎
 
 ### 开始
-- 安装
+- 安装
 ```bash
 npm install mini-render --save
-// 或者
+// 或者
 <script src='miniRender.js'></script>
 ```
 
@@ -25,7 +25,7 @@ var data = {
 // 渲染元素模板
 miniRender.renderElement('#box', data)
 
-// 也可以返回渲染结果
+// 也可以返回渲染结果
 var str = miniRender.renderString('<div>{{word}}</div>', data)
 console.log(str)
 
@@ -64,7 +64,7 @@ miniRender.filter('toUpperCase', function(val){
 miniRender.removeFilter('toUpperCase')
 </script>
 ```
-> 过滤器仅可用在上边这种普通的取值中
+> 过滤器仅可用在上边这种普通的取值中
 
 ### 判断
 ```html
