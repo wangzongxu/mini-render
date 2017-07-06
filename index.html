@@ -4,21 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>demo</title>
+    <title>miniRender</title>
 </head>
 <body>
     <div id="box">
-        <a href="{{ href }}">{{name}}</a>
+        <h3>first:</h3>
+        <p>{{first}}</p>
+
+        <h3>支持三元运算</h3>
+        <p>{{ gt > 8 ? gt : 8 }}</p>
+
+        <h3>空值:</h3>
+        <p>{{empty}}</p>
+
+        <h3>过滤:</h3>
+        <p>{{ word | toUpperCase }}</p>
+        
+        <h3>判断:</h3>
+        {{IF gt > lt}}
+            <p>gt比较大:{{gt}}</p>
+        {{ELSEIF lt < gt}}
+            <p>lt比较小:{{lt}}</p>
+        {{ELSE}}
+            <p>都不成立</p>
+        {{/IF}}
+
+        <h3>循环数组:</h3>
+        {{EACH array}}
+            <p>索引:{{$key}}  值:{{$value}}</p>
+        {{/EACH}}
+
+        <h3>循环对象:</h3>
+        {{EACH object}}
+            <p>属性名:{{$key}}  属性值:{{$value}}</p>
+        {{/EACH}}
     </div>
 </body>
-<script src="./dist/tinyhand.min.js"></script>
+<script src="./src/miniRender.js"></script>
 <script>
+
     var data = {
-        href: 'javascript:;',
-        name: 'name'
+        gt: 7,
+        lt: 6,
+        first: 'first',
+        array: [1,2,3],
+        object: {
+            key1: 'value1',
+            key2: 'value2'
+        },
+        word: 'aaaaa',
+        empty: undefined
     }
+    // 渲染字符串模板
+    var str = miniRender.renderString('<div>{{word}}</div>', data)
+    console.log(str)
+
+    // 注册过滤器
+    miniRender.filter('toUpperCase', function(val){
+        return val.toUpperCase()
+    })
     
-    var box = document.querySelector('#box');
-    box.innerHTML = tinyHand.render('#box', data)
+    // 移除过滤器
+    // miniRender.removeFilter('toUpperCase')
+
+    // 渲染元素内部模板
+    miniRender.renderElement('#box', data)
+    
 </script>
 </html>
