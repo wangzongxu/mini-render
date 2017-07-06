@@ -1,5 +1,5 @@
 {
-  "name": "miniRender",
+  "name": "mini-render",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/wangzongxu/tinyhand.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["miniRender", "templateRender", "render"],
+  "author": "wangzongxu",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/wangzongxu/tinyhand/issues"
