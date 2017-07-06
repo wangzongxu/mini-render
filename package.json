@@ -1,6 +1,6 @@
 {
   "name": "mini-render",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wangzongxu/tinyhand.git"
+    "url": "git+https://github.com/wangzongxu/miniRender.git"
   },
   "keywords": ["miniRender", "templateRender", "render"],
   "author": "wangzongxu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wangzongxu/tinyhand/issues"
+    "url": "https://github.com/wangzongxu/miniRender/issues"
   },
-  "homepage": "https://github.com/wangzongxu/tinyhand#readme",
+  "homepage": "https://github.com/wangzongxu/miniRender#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
