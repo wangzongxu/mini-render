@@ -9,6 +9,9 @@ npm install mini-render --save
 ```
 
 - 定义一些数据
+```html
+<div id="box">...</div>
+```
 ```js
 var data = {
     gt: 7,
