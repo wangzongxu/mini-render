@@ -30,13 +30,13 @@
         {{/IF}}
 
         <h3>循环数组:</h3>
-        {{EACH array}}
-            <p>索引:{{$key}}  值:{{$value}}</p>
+        {{EACH item, index IN array}}
+            <p>索引:{{index}}  值:{{item}}</p>
         {{/EACH}}
 
         <h3>循环对象:</h3>
-        {{EACH object}}
-            <p>属性名:{{$key}}  属性值:{{$value}}</p>
+        {{EACH val, key IN object}}
+            <p>属性名:{{key}}  属性值:{{val}}</p>
         {{/EACH}}
     </div>
 </body>

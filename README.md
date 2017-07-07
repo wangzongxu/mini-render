@@ -86,8 +86,8 @@ miniRender.removeFilter('toUpperCase')
 ### 循环
 ```html
 <!--数组-->
-{{EACH array}}
-    <p>索引:{{$key}}  值:{{$value}}</p>
+{{EACH item, index IN array}}
+    <p>索引:{{index}}  值:{{item}}</p>
 {{/EACH}}
 <!--结果:
     <p>索引:0  值:1</p>
@@ -96,8 +96,8 @@ miniRender.removeFilter('toUpperCase')
 -->
 
 <!--对象-->
-{{EACH object}}
-    <p>属性名:{{$key}}  属性值:{{$value}}</p>
+{{EACH val,key IN object}}
+    <p>属性名:{{key}}  属性值:{{val}}</p>
 {{/EACH}}
 <!--结果:
     <p>属性名:key1  属性值:value1</p>

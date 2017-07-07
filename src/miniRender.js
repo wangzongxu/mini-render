@@ -76,10 +76,6 @@
         this.filterMap = {}
     }
     Render.prototype = {
-        tools: tools,
-        config: function(config) { // 自定义配置
-            tools.extends(this, config)
-        },
         handleSpecialSymbols: function(str) { // 处理特殊字符
             return str.replace(this.commentsReg, '')
                       .replace(this.flagTrimReg, this.startFlag + '$1' + this.endFlag)
@@ -133,6 +129,13 @@
             var variableSet = this.makeVariableSet(data)
 
             var code = 'var output = "";'
+            // add tools
+            code += 'var tools = {'
+            tools.each(tools, function(val, k) {
+                code += k + ':' + val + ','
+            })
+            code += '};'
+
             code += 'var filters = {'
             // add filters
             if (!tools.isEmpty(this.filterMap)) {
@@ -141,6 +144,7 @@
                 })
             }
             code += '};'
+            // main
             for (var i = 0; i < splitStartArr.length; i++) {
                 var item =splitStartArr[i]
 
@@ -174,7 +178,26 @@
                      // each
                     } else if (this.eachReg.test(coding)) {
                         coding = coding.replace(this.eachReg, '')
-                        code += 'miniRender.tools.each('+ coding +', function($value, $key) {'
+                        var temp = coding.split(/\s+IN\s+/)
+
+                        if (temp.length === 1) {
+                            throw new Error('can not found keyword "IN"')
+                        }
+
+                        var $params = temp[0].split(/\s*(?:，|,)\s*/),
+                            $item,
+                            $index = ''
+                        coding = temp[1]
+                        // has item only
+                        if ($params.length === 1) {
+                            $item = $params
+                        } else {
+                            // has item ang index
+                            $item = $params[0]
+                            $index = ', ' + $params[1]
+                        }
+
+                        code += 'tools.each('+ coding +', function('+ $item + $index +') {'
                     } else if (this.endEachReg.test(coding)) {
                         code += '});'
                     } else {
@@ -196,9 +219,9 @@
                             // normal
                             code += 'var handleCoding = ' + coding + ';'
                         }
-                        code += 'if (miniRender.tools.is(handleCoding, "Array") || miniRender.tools.is(handleCoding, "Object")) {'
+                        code += 'if (tools.is(handleCoding, "Array") || tools.is(handleCoding, "Object")) {'
                         code += '   output += JSON.stringify(handleCoding)'
-                        code += '} else if (miniRender.tools.is(handleCoding, "Null") || miniRender.tools.is(handleCoding, "Undefined")) {'
+                        code += '} else if (tools.is(handleCoding, "Null") || tools.is(handleCoding, "Undefined")) {'
                         code += '   output += ""'
                         code += '} else {'
                         code += '   output += (handleCoding)'
